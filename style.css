@@ -1,33 +1,149 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Theme tokens: dark (default) ── */
+body {
+  --bg:                 #111111;
+  --card-bg:            #1a1a1a;
+  --card-border:        #2a2a2a;
+  --text:               #f0ece4;
+  --text-muted:         #b0aa9f;
+  --text-subtle:        #888;
+  --label:              #9a9490;
+  --input-bg:           #242424;
+  --input-border:       #3a3a3a;
+  --input-text:         #f0ece4;
+  --input-focus-border: #f9a823;
+  --divider:            #2e2e2e;
+  --preview-border:     #2e2e2e;
+  --btn-bg:             #f9a823;
+  --btn-border:         #f9a823;
+  --btn-text:           #1a1a1a;
+  --btn-hover-bg:       #e6961a;
+  --hint:               #9a9490;
+  --shadow:             rgba(0, 0, 0, 0.4);
+  --toggle-track:       #555;
+  --toggle-active:      #f9a823;
+}
+
+/* ── Theme tokens: light ── */
+body.light {
+  --bg:                 #f4f1eb;
+  --card-bg:            #fff;
+  --card-border:        #e0dcd4;
+  --text:               #333;
+  --text-muted:         #888;
+  --text-subtle:        #555;
+  --label:              #aaa;
+  --input-bg:           #faf9f7;
+  --input-border:       #e0dcd4;
+  --input-text:         #333;
+  --input-focus-border: #1a3a6b;
+  --divider:            #e8e4dd;
+  --preview-border:     #f0ece6;
+  --btn-bg:             #f9a823;
+  --btn-border:         #f9a823;
+  --btn-text:           #1a1a1a;
+  --btn-hover-bg:       #e6961a;
+  --hint:               #aaa;
+  --shadow:             rgba(0, 0, 0, 0.06);
+  --toggle-track:       #ccc;
+  --toggle-active:      #1a3a6b;
+}
+
 body {
   font-family: 'Georgia', serif;
-  background: #f4f1eb;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* ── Page header ── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 680px;
+  width: 100%;
+  margin-bottom: 1.5rem;
 }
 
 .page-title {
   font-family: 'Courier New', monospace;
-  font-size: 11px;
+  font-size: 16px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #888;
-  margin-bottom: 2rem;
+  color: var(--text-muted);
+}
+
+/* ── Pill toggle switch ── */
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme-switch input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch-track {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--toggle-track);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.theme-switch input:checked + .theme-switch-track {
+  background: var(--toggle-active);
+}
+
+.theme-switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s;
+}
+
+.theme-switch input:checked + .theme-switch-track .theme-switch-thumb {
+  transform: translateX(18px);
+}
+
+.theme-switch-label {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #e0dcd4;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 4px;
   padding: 2.5rem;
   max-width: 680px;
   width: 100%;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .section-label {
@@ -35,34 +151,35 @@ body {
   font-size: 14px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #aaa;
+  color: var(--label);
   margin-bottom: 1rem;
 }
 
 /* ── Signature preview wrapper ── */
 #signature-preview {
-  padding: 1.25rem 0;
-  border-top: 1px solid #f0ece6;
-  border-bottom: 1px solid #f0ece6;
+  padding: 1.25rem 0.75rem;
+  border: 1px solid var(--preview-border);
+  border-radius: 3px;
   margin-bottom: 1.75rem;
+  background: #ffffff;
 }
 
 .divider {
   border: none;
-  border-top: 1px solid #e8e4dd;
+  border-top: 1px solid var(--divider);
   margin: 1.75rem 0;
 }
 
 .instructions {
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: #888;
+  color: var(--text-muted);
   line-height: 1.8;
   margin-bottom: 1.5rem;
 }
 
 .instructions strong {
-  color: #555;
+  color: var(--text-subtle);
   font-weight: normal;
 }
 
@@ -80,15 +197,15 @@ button {
   padding: 10px 20px;
   border-radius: 3px;
   cursor: pointer;
-  border: 1px solid #ccc;
-  background: #fff;
-  color: #444;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-text);
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 button:hover:not(:disabled) {
-  background: #f4f1eb;
-  border-color: #aaa;
+  background: var(--btn-hover-bg);
+  border-color: var(--text-muted);
 }
 
 button:disabled {
@@ -97,19 +214,20 @@ button:disabled {
 }
 
 button.primary {
-  background: #1a3a6b;
-  color: #fff;
-  border-color: #1a3a6b;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border-color: var(--btn-border);
 }
 
-button.primary:hover {
-  background: #142e55;
+button.primary:hover:not(:disabled) {
+  background: var(--btn-hover-bg);
+  border-color: var(--btn-hover-bg);
 }
 
 #form-hint {
   font-family: 'Courier New', monospace;
-  font-size: 10px;
-  color: #aaa;
+  font-size: 14px;
+  color: var(--hint);
   margin-top: 0.6rem;
   min-height: 16px;
 }
@@ -117,7 +235,7 @@ button.primary:hover {
 #copy-status {
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: #2563eb;
+  color: #4a90d9;
   margin-top: 0.75rem;
   min-height: 18px;
 }
@@ -140,24 +258,24 @@ button.primary:hover {
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #aaa;
+  color: var(--label);
 }
 
 .form-group input {
   font-family: 'Courier New', monospace;
   font-size: 12px;
   padding: 7px 10px;
-  border: 1px solid #e0dcd4;
+  border: 1px solid var(--input-border);
   border-radius: 3px;
-  color: #333;
-  background: #faf9f7;
+  color: var(--input-text);
+  background: var(--input-bg);
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, background 0.15s;
 }
 
 .form-group input:focus {
-  border-color: #1a3a6b;
-  background: #fff;
+  border-color: var(--input-focus-border);
+  background: var(--card-bg);
 }
 
 .form-group.wide {
@@ -166,7 +284,7 @@ button.primary:hover {
 
 .form-group input.invalid {
   border-color: #c0392b;
-  background: #fff8f7;
+  background: rgba(192, 57, 43, 0.1);
 }
 
 .form-group input.invalid:focus {

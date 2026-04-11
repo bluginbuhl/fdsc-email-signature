@@ -8,7 +8,14 @@
 </head>
 <body>
 
-  <p class="page-title">FDSC Email Signature Generator</p>
+  <div class="page-header">
+    <p class="page-title">FDSC Email Signature Generator</p>
+    <label class="theme-switch">
+      <input type="checkbox" id="theme-toggle" role="switch" aria-label="Toggle light mode" />
+      <span class="theme-switch-track"><span class="theme-switch-thumb"></span></span>
+      <span class="theme-switch-label">Light</span>
+    </label>
+  </div>
 
   <div class="card">
     <p class="section-label">Your Details</p>
@@ -47,7 +54,7 @@
         <tr>
 
           <!-- LOGO CELL -->
-          <td style="padding-right: 10px; vertical-align: middle;">
+          <td style="padding-right: 12px; vertical-align: middle;">
             <a href="https://flagstaffdarkskies.org" target="_blank">
               <img src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/fdsc_signature.png"
                 width="100" height="100" style="display:block;" alt="FDSC logo" />
@@ -55,12 +62,12 @@
           </td>
 
           <!-- SEPARATOR CELL -->
-          <td style="padding-right: 10px; vertical-align: middle;">
+          <td style="padding-right: 12px; vertical-align: middle;">
             <div style="width: 1.5px; height: 100px; background-color: #f9a823;"></div>
           </td>
 
           <!-- INFO CELL -->
-          <td style="padding-left: 4px; vertical-align: middle;">
+          <td style="padding-left: 0; vertical-align: middle;">
 
             <!-- Name + pronouns -->
             <p style="margin: 0 0 2px 0; font-size: 15px; font-weight: bold; color: #1a1a1a;">
@@ -242,6 +249,22 @@
       el.textContent = msg;
       setTimeout(() => { el.textContent = ''; }, 4000);
     }
+
+    // ── Theme toggle ──
+    (function() {
+      const checkbox = document.getElementById('theme-toggle');
+      if (localStorage.getItem('fdsc-theme') === 'light') {
+        document.body.classList.add('light');
+        checkbox.checked = true;
+        document.querySelector('.theme-switch-label').textContent = 'Dark';
+      }
+      checkbox.addEventListener('change', function() {
+        const isLight = checkbox.checked;
+        document.body.classList.toggle('light', isLight);
+        document.querySelector('.theme-switch-label').textContent = isLight ? 'Dark' : 'Light';
+        localStorage.setItem('fdsc-theme', isLight ? 'light' : 'dark');
+      });
+    })();
 
     // Populate hint on initial load
     updateButtons();
