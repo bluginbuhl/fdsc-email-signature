@@ -1,0 +1,185 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Georgia', serif;
+  background: #f4f1eb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.page-title {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e0dcd4;
+  border-radius: 4px;
+  padding: 2.5rem;
+  max-width: 680px;
+  width: 100%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.section-label {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 1rem;
+}
+
+/* ── Signature preview wrapper ── */
+#signature-preview {
+  padding: 1.25rem 0;
+  border-top: 1px solid #f0ece6;
+  border-bottom: 1px solid #f0ece6;
+  margin-bottom: 1.75rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e8e4dd;
+  margin: 1.75rem 0;
+}
+
+.instructions {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #888;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.instructions strong {
+  color: #555;
+  font-weight: normal;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #444;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+button:hover:not(:disabled) {
+  background: #f4f1eb;
+  border-color: #aaa;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: #1a3a6b;
+  color: #fff;
+  border-color: #1a3a6b;
+}
+
+button.primary:hover {
+  background: #142e55;
+}
+
+#form-hint {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: #aaa;
+  margin-top: 0.6rem;
+  min-height: 16px;
+}
+
+#copy-status {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #2563eb;
+  margin-top: 0.75rem;
+  min-height: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.form-group input {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 7px 10px;
+  border: 1px solid #e0dcd4;
+  border-radius: 3px;
+  color: #333;
+  background: #faf9f7;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.form-group input:focus {
+  border-color: #1a3a6b;
+  background: #fff;
+}
+
+.form-group.wide {
+  grid-column: 1 / -1;
+}
+
+.form-group input.invalid {
+  border-color: #c0392b;
+  background: #fff8f7;
+}
+
+.form-group input.invalid:focus {
+  border-color: #c0392b;
+}
+
+.field-error {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: #c0392b;
+  display: none;
+}
+
+.field-error.visible {
+  display: block;
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FDSC Email Signature Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <p class="page-title">FDSC Email Signature Generator</p>
+
+  <div class="card">
+    <p class="section-label">Your Details</p>
+    <div class="form-grid">
+      <div class="form-group wide">
+        <label for="f-name">Full Name</label>
+        <input id="f-name" type="text" placeholder="e.g. Jane Smith" />
+      </div>
+      <div class="form-group">
+        <label for="f-pronouns">Pronouns</label>
+        <input id="f-pronouns" type="text" placeholder="e.g. she/her (leave blank to hide)" />
+      </div>
+      <div class="form-group">
+        <label for="f-title">Title / Role</label>
+        <input id="f-title" type="text" placeholder="e.g. Executive Director" />
+      </div>
+      <div class="form-group">
+        <label for="f-phone">Phone</label>
+        <input id="f-phone" type="tel" placeholder="e.g. +1 (928) 000-0000" />
+        <span class="field-error" id="f-phone-error">Use format: +1 (928) 000-0000</span>
+      </div>
+      <div class="form-group">
+        <label for="f-email">Email</label>
+        <input id="f-email" type="email" placeholder="e.g. name@flagstaffdarkskies.org" />
+        <span class="field-error" id="f-email-error">Enter a valid email address</span>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <p class="section-label">Signature Preview</p>
+
+    <div id="signature-preview">
+      <table id="sig" cellpadding="0" cellspacing="0" border="0"
+        style="font-family: Arial, sans-serif; font-size: 13px; color: #333333; line-height: 1.4;">
+        <tr>
+
+          <!-- LOGO CELL -->
+          <td style="padding-right: 10px; vertical-align: middle;">
+            <a href="https://flagstaffdarkskies.org" target="_blank">
+              <img src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/fdsc_signature.png"
+                width="100" height="100" style="display:block;" alt="FDSC logo" />
+            </a>
+          </td>
+
+          <!-- SEPARATOR CELL -->
+          <td style="padding-right: 10px; vertical-align: middle;">
+            <div style="width: 1.5px; height: 100px; background-color: #f9a823;"></div>
+          </td>
+
+          <!-- INFO CELL -->
+          <td style="padding-left: 4px; vertical-align: middle;">
+
+            <!-- Name + pronouns -->
+            <p style="margin: 0 0 2px 0; font-size: 15px; font-weight: bold; color: #1a1a1a;">
+              <span id="sig-name">Jane Smith</span><span id="sig-pronouns" style="font-size: 12px; font-weight: normal; color: #888888;">&nbsp;(she/her)</span>
+            </p>
+
+            <!-- Title -->
+            <p style="margin: 0 0 4px 0; font-size: 12px; color: #000000; font-weight: normal; letter-spacing: 0.02em;">
+              <span id="sig-title">Executive Director</span>
+            </p>
+
+            <!-- Company -->
+            <p style="margin: 0 0 8px 0; font-size: 12px; color: #555555; font-weight: bold;">
+              <a href="https://flagstaffdarkskies.org" target="_blank"
+                style="color: #2563eb; text-decoration: none !important;"><font color="#2563eb"><span style="text-decoration: none !important; color: #2563eb;">Flagstaff Dark Skies Coalition</span></font></a>
+            </p>
+
+            <!-- Phone + Email -->
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="font-size: 12px; color: #555555; padding-right: 18px; white-space: nowrap;">
+                  <img src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/phone.svg"
+                    width="13" height="13" style="vertical-align:middle;margin-right:3px;" alt="phone" />&nbsp;<span id="sig-phone">+1 (928) 000-0000</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-size: 12px; white-space: nowrap;">
+                  <img src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/mail.svg"
+                    width="13" height="13" style="vertical-align:middle;margin-right:3px;" alt="email" />&nbsp;<a id="sig-email-link" href="mailto:name@flagstaffdarkskies.org"
+                    style="color: #2563eb; text-decoration: none !important;"><font color="#2563eb"><span style="text-decoration: none !important; color: #2563eb;"><span id="sig-email">name@flagstaffdarkskies.org</span></span></font></a>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <hr class="divider" />
+
+    <p class="section-label">How to add to Gmail</p>
+    <div class="instructions">
+      <strong>1.</strong> Click "Copy signature" below.<br>
+      <strong>2.</strong> In Gmail &rarr; Settings (&#9881;) &rarr; See all settings &rarr; General &rarr; Signature.<br>
+      <strong>3.</strong> Create or edit a signature, click into the text box, and paste (&#8984;V / Ctrl+V).<br>
+      <strong>4.</strong> Save changes at the bottom of the page.
+    </div>
+
+    <div class="btn-row">
+      <button id="btn-copy" class="primary" onclick="copySignature()" disabled>Copy signature</button>
+      <button id="btn-select" onclick="selectSignature()" disabled>Select signature HTML</button>
+    </div>
+    <p id="form-hint"></p>
+    <p id="copy-status"></p>
+  </div>
+
+  <script>
+    const EXAMPLES = {
+      name:     'Jane Smith',
+      pronouns: 'she/her',
+      title:    'Executive Director',
+      phone:    '+1 (928) 000-0000',
+      email:    'name@flagstaffdarkskies.org'
+    };
+
+    function updateSignature() {
+      const name     = document.getElementById('f-name').value.trim();
+      const pronouns = document.getElementById('f-pronouns').value.trim();
+      const title    = document.getElementById('f-title').value.trim();
+      const phone    = document.getElementById('f-phone').value.trim();
+      const email    = document.getElementById('f-email').value.trim();
+
+      document.getElementById('sig-name').textContent = name || EXAMPLES.name;
+
+      const pronounsEl  = document.getElementById('sig-pronouns');
+      const pronounsVal = pronouns || (name ? '' : EXAMPLES.pronouns);
+      pronounsEl.textContent = pronounsVal ? '\u00a0(' + pronounsVal + ')' : '';
+
+      document.getElementById('sig-title').textContent = title || EXAMPLES.title;
+      document.getElementById('sig-phone').textContent = phone || EXAMPLES.phone;
+
+      const emailVal = email || EXAMPLES.email;
+      document.getElementById('sig-email').textContent = emailVal;
+      document.getElementById('sig-email-link').href = 'mailto:' + emailVal;
+    }
+
+    const PHONE_RE = /^\+\d+\s\(\d+\)\s\d[\d\s\-\.]+\d$/;
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const touched = { 'f-phone': false, 'f-email': false };
+
+    function validateField(id) {
+      const val = document.getElementById(id).value.trim();
+      let valid = true;
+      if (id === 'f-phone' && val !== '') valid = PHONE_RE.test(val);
+      if (id === 'f-email' && val !== '') valid = EMAIL_RE.test(val);
+      document.getElementById(id).classList.toggle('invalid', !valid && val !== '');
+      const errEl = document.getElementById(id + '-error');
+      if (errEl) errEl.classList.toggle('visible', !valid && val !== '');
+      return valid || val === '';
+    }
+
+    function updateButtons() {
+      const name  = document.getElementById('f-name').value.trim();
+      const title = document.getElementById('f-title').value.trim();
+      const phone = document.getElementById('f-phone').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+
+      const missing = [];
+      if (!name)                              missing.push('full name');
+      if (!title)                             missing.push('title');
+      if (!phone || !PHONE_RE.test(phone))    missing.push('valid phone');
+      if (!email || !EMAIL_RE.test(email))    missing.push('valid email');
+
+      const valid = missing.length === 0;
+      document.getElementById('btn-copy').disabled = !valid;
+      document.getElementById('btn-select').disabled = !valid;
+
+      const hintEl = document.getElementById('form-hint');
+      hintEl.textContent = valid ? '' : 'Still needed: ' + missing.join(', ') + '.';
+    }
+
+    ['f-phone', 'f-email'].forEach(function(id) {
+      document.getElementById(id).addEventListener('blur', function() {
+        touched[id] = true;
+        validateField(id);
+      });
+    });
+
+    ['f-name', 'f-pronouns', 'f-title', 'f-phone', 'f-email'].forEach(function(id) {
+      document.getElementById(id).addEventListener('input', function() {
+        if (touched[id]) validateField(id);
+        updateSignature();
+        updateButtons();
+      });
+    });
+
+    function copySignature() {
+      const sig = document.getElementById('sig');
+      const range = document.createRange();
+      range.selectNode(sig);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+      try {
+        const html = sig.outerHTML;
+        const text = sig.innerText;
+        const blob = new Blob([html], { type: 'text/html' });
+        const textBlob = new Blob([text], { type: 'text/plain' });
+        const item = new ClipboardItem({ 'text/html': blob, 'text/plain': textBlob });
+        navigator.clipboard.write([item]).then(() => {
+          showStatus('✓ Copied! Paste directly into Gmail.');
+        }).catch(() => {
+          document.execCommand('copy');
+          showStatus('✓ Copied! Paste directly into Gmail.');
+        });
+      } catch (e) {
+        document.execCommand('copy');
+        showStatus('✓ Copied! Paste directly into Gmail.');
+      }
+
+      sel.removeAllRanges();
+    }
+
+    function selectSignature() {
+      const sig = document.getElementById('sig');
+      const range = document.createRange();
+      range.selectNode(sig);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      showStatus('Signature selected — press ⌘C / Ctrl+C to copy.');
+    }
+
+    function showStatus(msg) {
+      const el = document.getElementById('copy-status');
+      el.textContent = msg;
+      setTimeout(() => { el.textContent = ''; }, 4000);
+    }
+
+    // Populate hint on initial load
+    updateButtons();
+  </script>
+</body>
+</html>
