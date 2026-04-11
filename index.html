@@ -11,8 +11,15 @@
   <div class="page-header">
     <p class="page-title">FDSC Email Signature Generator</p>
     <label class="theme-switch">
-      <input type="checkbox" id="theme-toggle" role="switch" aria-label="Toggle light mode" />
-      <span class="theme-switch-track"><span class="theme-switch-thumb"></span></span>
+      <input
+        type="checkbox"
+        id="theme-toggle"
+        role="switch"
+        aria-label="Toggle light mode"
+      />
+      <span class="theme-switch-track">
+        <span class="theme-switch-thumb"></span>
+      </span>
       <span class="theme-switch-label">Light</span>
     </label>
   </div>
@@ -20,28 +27,42 @@
   <div class="card">
     <p class="section-label">Your Details</p>
     <div class="form-grid">
+
       <div class="form-group wide">
         <label for="f-name">Full Name</label>
         <input id="f-name" type="text" placeholder="e.g. Jane Smith" />
       </div>
+
       <div class="form-group">
         <label for="f-pronouns">Pronouns</label>
-        <input id="f-pronouns" type="text" placeholder="e.g. she/her (leave blank to hide)" />
+        <input
+          id="f-pronouns"
+          type="text"
+          placeholder="e.g. she/her (leave blank to hide)"
+        />
       </div>
+
       <div class="form-group">
         <label for="f-title">Title / Role</label>
         <input id="f-title" type="text" placeholder="e.g. Executive Director" />
       </div>
+
       <div class="form-group">
         <label for="f-phone">Phone</label>
         <input id="f-phone" type="tel" placeholder="e.g. +1 (928) 000-0000" />
         <span class="field-error" id="f-phone-error">Use format: +1 (928) 000-0000</span>
       </div>
+
       <div class="form-group">
         <label for="f-email">Email</label>
-        <input id="f-email" type="email" placeholder="e.g. name@flagstaffdarkskies.org" />
+        <input
+          id="f-email"
+          type="email"
+          placeholder="e.g. name@flagstaffdarkskies.org"
+        />
         <span class="field-error" id="f-email-error">Enter a valid email address</span>
       </div>
+
     </div>
 
     <hr class="divider" />
@@ -49,29 +70,60 @@
     <p class="section-label">Signature Preview</p>
 
     <div id="signature-preview">
-      <table id="sig" cellpadding="0" cellspacing="0" border="0"
-        style="font-family: Arial, sans-serif; font-size: 13px; color: #333333; line-height: 1.4;">
+      <!--
+        Email signature table.
+        Uses HTML attributes (width, valign, bgcolor) alongside inline CSS
+        for compatibility with Outlook, Apple Mail, and Gmail mobile.
+      -->
+      <table
+        id="sig"
+        cellpadding="0"
+        cellspacing="0"
+        border="0"
+        style="font-family: Arial, sans-serif; font-size: 13px; color: #333333; line-height: 1.4;"
+      >
         <tr>
 
-          <!-- LOGO CELL -->
-          <td style="padding-right: 12px; vertical-align: middle;">
+          <!-- Logo -->
+          <td
+            width="100"
+            valign="middle"
+            style="padding: 0 12px 0 0; vertical-align: middle;"
+          >
             <a href="https://flagstaffdarkskies.org" target="_blank">
-              <img src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/fdsc_signature.png"
-                width="100" height="100" style="display:block;" alt="FDSC logo" />
+              <img
+                src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/fdsc_signature.png"
+                width="100"
+                height="100"
+                style="display: block;"
+                alt="FDSC logo"
+              />
             </a>
           </td>
 
-          <!-- SEPARATOR CELL -->
-          <td style="padding-right: 12px; vertical-align: middle;">
-            <div style="width: 1.5px; height: 100px; background-color: #f9a823;"></div>
-          </td>
+          <!-- Separator -->
+          <td
+            width="2"
+            valign="middle"
+            bgcolor="#f9a823"
+            style="width: 2px; background-color: #f9a823; padding: 0; font-size: 0; line-height: 0;"
+          >&nbsp;</td>
 
-          <!-- INFO CELL -->
-          <td style="padding-left: 0; vertical-align: middle;">
+          <!-- Spacer -->
+          <td
+            width="12"
+            style="width: 12px; padding: 0; font-size: 0; line-height: 0;"
+          >&nbsp;</td>
+
+          <!-- Contact info -->
+          <td valign="middle" style="padding: 0; vertical-align: middle;">
 
             <!-- Name + pronouns -->
             <p style="margin: 0 0 2px 0; font-size: 15px; font-weight: bold; color: #1a1a1a;">
-              <span id="sig-name">Jane Smith</span><span id="sig-pronouns" style="font-size: 12px; font-weight: normal; color: #888888;">&nbsp;(she/her)</span>
+              <span id="sig-name">Jane Smith</span><span
+                id="sig-pronouns"
+                style="font-size: 12px; font-weight: normal; color: #888888;"
+              >&nbsp;(she/her)</span>
             </p>
 
             <!-- Title -->
@@ -79,25 +131,46 @@
               <span id="sig-title">Executive Director</span>
             </p>
 
-            <!-- Company -->
+            <!-- Organisation -->
             <p style="margin: 0 0 8px 0; font-size: 12px; color: #555555; font-weight: bold;">
-              <a href="https://flagstaffdarkskies.org" target="_blank"
-                style="color: #2563eb; text-decoration: none !important;"><font color="#2563eb"><span style="text-decoration: none !important; color: #2563eb;">Flagstaff Dark Skies Coalition</span></font></a>
+              <a
+                href="https://flagstaffdarkskies.org"
+                target="_blank"
+                style="color: #2563eb; text-decoration: none !important;"
+              ><font color="#2563eb"><span style="text-decoration: none !important; color: #2563eb;">Flagstaff Dark Skies Coalition</span></font></a>
             </p>
 
             <!-- Phone + Email -->
-            <table cellpadding="0" cellspacing="0" border="0">
+            <table
+              cellpadding="0"
+              cellspacing="0"
+              border="0"
+              style="margin: 0; padding: 0; border-collapse: collapse;"
+            >
               <tr>
-                <td style="font-size: 12px; color: #555555; padding-right: 18px; white-space: nowrap;">
-                  <img src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/phone.svg"
-                    width="13" height="13" style="vertical-align:middle;margin-right:3px;" alt="phone" />&nbsp;<span id="sig-phone">+1 (928) 000-0000</span>
+                <td style="font-size: 12px; color: #555555; white-space: nowrap; padding: 0 0 4px 0;">
+                  <img
+                    src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/phone.svg"
+                    width="13"
+                    height="13"
+                    style="vertical-align: middle; margin-right: 3px;"
+                    alt="phone"
+                  />&nbsp;<span id="sig-phone">+1 (928) 000-0000</span>
                 </td>
               </tr>
               <tr>
-                <td style="font-size: 12px; white-space: nowrap;">
-                  <img src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/mail.svg"
-                    width="13" height="13" style="vertical-align:middle;margin-right:3px;" alt="email" />&nbsp;<a id="sig-email-link" href="mailto:name@flagstaffdarkskies.org"
-                    style="color: #2563eb; text-decoration: none !important;"><font color="#2563eb"><span style="text-decoration: none !important; color: #2563eb;"><span id="sig-email">name@flagstaffdarkskies.org</span></span></font></a>
+                <td style="font-size: 12px; white-space: nowrap; word-break: break-all; padding: 0;">
+                  <img
+                    src="https://raw.githubusercontent.com/bluginbuhl/fdsc-email-signature/main/assets/mail.svg"
+                    width="13"
+                    height="13"
+                    style="vertical-align: middle; margin-right: 3px;"
+                    alt="email"
+                  />&nbsp;<a
+                    id="sig-email-link"
+                    href="mailto:name@flagstaffdarkskies.org"
+                    style="color: #2563eb; text-decoration: none !important;"
+                  ><font color="#2563eb"><span style="text-decoration: none !important; color: #2563eb;"><span id="sig-email">name@flagstaffdarkskies.org</span></span></font></a>
                 </td>
               </tr>
             </table>
@@ -178,10 +251,10 @@
       const email = document.getElementById('f-email').value.trim();
 
       const missing = [];
-      if (!name)                              missing.push('full name');
-      if (!title)                             missing.push('title');
-      if (!phone || !PHONE_RE.test(phone))    missing.push('valid phone');
-      if (!email || !EMAIL_RE.test(email))    missing.push('valid email');
+      if (!name)                           missing.push('full name');
+      if (!title)                          missing.push('title');
+      if (!phone || !PHONE_RE.test(phone)) missing.push('valid phone');
+      if (!email || !EMAIL_RE.test(email)) missing.push('valid email');
 
       const valid = missing.length === 0;
       document.getElementById('btn-copy').disabled = !valid;
@@ -217,7 +290,7 @@
       try {
         const html = sig.outerHTML;
         const text = sig.innerText;
-        const blob = new Blob([html], { type: 'text/html' });
+        const blob     = new Blob([html], { type: 'text/html' });
         const textBlob = new Blob([text], { type: 'text/plain' });
         const item = new ClipboardItem({ 'text/html': blob, 'text/plain': textBlob });
         navigator.clipboard.write([item]).then(() => {
